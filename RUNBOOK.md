@@ -113,6 +113,10 @@ Each variant is verified after quantization (promoted module count in
 `extra_config` must match) before its eval is allowed to run.
 
 ## B70-specific findings
+- Each variant checkpoint is 12-26 GiB, so `xpu-variants/` grows by >200 GiB
+  over a sweep. `/` filled transiently once (v10 quantize died with
+  `No space left on device`); check `df -h` before a sweep and prune
+  `xpu-variants/` afterwards.
 - `--disable_opt_rtn` is required: the default opt_rtn path crashes on XPU
   (torch-xpu-ops "index out of bounds" SYCL assertion).
 - The model-free RTN route (what `--disable_opt_rtn` selects) quantizes **all**

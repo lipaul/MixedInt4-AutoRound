@@ -1,0 +1,12 @@
+[eval] loading model: /home/acm/work/models/xpu-variants/v10_gateupq
+[eval] model_args: {'pretrained': '/home/acm/work/models/xpu-variants/v10_gateupq', 'dtype': 'bfloat16', 'trust_remote_code': True, 'max_model_len': 4096, 'gpu_memory_utilization': 0.95, 'seed': 1234, 'max_num_seqs': 8, 'enable_thinking': None, 'quantization': 'inc', 'max_num_batched_tokens': 768, 'kv_cache_memory_bytes': 800000000}
+INFO 09-28 15:54:33 [api_utils.py:286] non-default args: {'trust_remote_code': True, 'dtype': 'bfloat16', 'seed': 1234, 'max_model_len': 4096, 'gpu_memory_utilization': 0.95, 'kv_cache_memory_bytes': 800000000, 'max_num_batched_tokens': 768, 'max_num_seqs': 8, 'disable_log_stats': True, 'quantization': 'inc', 'model': '/home/acm/work/models/xpu-variants/v10_gateupq'}
+WARNING 09-28 15:54:33 [envs.py:2248] Unknown vLLM environment variable detected: VLLM_DISABLE_CUDA_PLATFORM
+INFO 09-28 15:54:33 [model.py:684] Resolved architecture: Qwen3_5ForConditionalGeneration
+INFO 09-28 15:54:33 [model.py:2021] Using max model len 4096
+WARNING 09-28 15:54:33 [model.py:981] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+INFO 09-28 15:54:34 [scheduler.py:277] Chunked prefill is enabled with max_num_batched_tokens=768.
+INFO 09-28 15:54:34 [config.py:625] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
+INFO 09-28 15:54:34 [kernel.py:369] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+WARNING 09-28 15:54:34 [xpu.py:302] XPU Graph is disabled by environment variable, please set VLLM_XPU_ENABLE_XPU_GRAPH=1 to enable it.
+INFO 09-28 15:54:34 [xpu.py:381] XPU platform: set server shutdown_timeout=5.

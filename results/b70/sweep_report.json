@@ -114,22 +114,66 @@
     {
       "tag": "v3h_downhalf",
       "desc": "W4 + down_proj -> fp16 in every other layer (32/64, dose)",
-      "status": "pending"
+      "status": "done",
+      "avg_bits_all": 6.925,
+      "avg_bits_quantizable": 5.824,
+      "boolq_acc": 0.8333,
+      "boolq_stderr": 0.0065,
+      "n": 3270,
+      "delta_vs_fp8_pp": -4.89,
+      "mcnemar_discordant": "190/30",
+      "mcnemar_p": 1.2508073808509655e-29,
+      "seconds": 1323.6886010169983,
+      "weights_gib": 22.35,
+      "input_tok_s": 738.14
     },
     {
       "tag": "v7_selfqkv",
       "desc": "W4 + self_attn q/k/v -> fp16",
-      "status": "pending"
+      "status": "done",
+      "avg_bits_all": 6.261,
+      "avg_bits_quantizable": 5.079,
+      "boolq_acc": 0.8388,
+      "boolq_stderr": 0.0064,
+      "n": 3270,
+      "delta_vs_fp8_pp": -4.34,
+      "mcnemar_discordant": "176/34",
+      "mcnemar_p": 2.719551957070473e-24,
+      "seconds": 1360.9154136180878,
+      "weights_gib": 20.09,
+      "input_tok_s": 717.86
     },
     {
       "tag": "v8_outonly",
       "desc": "W4 + linear_attn.out_proj only -> fp16 (splits v2)",
-      "status": "pending"
+      "status": "done",
+      "avg_bits_all": 6.369,
+      "avg_bits_quantizable": 5.201,
+      "boolq_acc": 0.8511,
+      "boolq_stderr": 0.0062,
+      "n": 3270,
+      "delta_vs_fp8_pp": -3.12,
+      "mcnemar_discordant": "137/35",
+      "mcnemar_p": 1.8373021340639184e-15,
+      "seconds": 1356.572681903839,
+      "weights_gib": 20.54,
+      "input_tok_s": 720.23
     },
     {
       "tag": "v9_oonly",
       "desc": "W4 + self_attn.o_proj only -> fp16 (splits v2)",
-      "status": "pending"
+      "status": "done",
+      "avg_bits_all": 5.966,
+      "avg_bits_quantizable": 4.748,
+      "boolq_acc": 0.8318,
+      "boolq_stderr": 0.0065,
+      "n": 3270,
+      "delta_vs_fp8_pp": -5.05,
+      "mcnemar_discordant": "197/32",
+      "mcnemar_p": 3.537436810737399e-30,
+      "seconds": 1380.2718043327332,
+      "weights_gib": 19.2,
+      "input_tok_s": 707.79
     },
     {
       "tag": "v10_gateupq",

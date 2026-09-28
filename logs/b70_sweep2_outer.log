@@ -2,3 +2,19 @@
 [sweep2] === v3h_downhalf: quantize (13:36:27) ===
 [verify] promoted 32 / expected 32 (extra_config total 143)
 [sweep2] === v3h_downhalf: eval full BoolQ (13:36:54) ===
+[sweep2] v3h_downhalf eval rc=0 (14:01:26)
+[sweep2] === v7_selfqkv: quantize (14:01:26) ===
+[verify] promoted 54 / expected 51 (extra_config total 165)
+[sweep2] === v7_selfqkv: eval full BoolQ (14:01:54) ===
+[sweep2] v7_selfqkv eval rc=0 (14:27:00)
+[sweep2] === v8_outonly: quantize (14:27:00) ===
+[verify] promoted 49 / expected 48 (extra_config total 160)
+[sweep2] === v8_outonly: eval full BoolQ (14:27:29) ===
+[sweep2] v8_outonly eval rc=0 (14:52:38)
+[sweep2] === v9_oonly: quantize (14:52:38) ===
+[verify] promoted 18 / expected 17 (extra_config total 129)
+[sweep2] === v9_oonly: eval full BoolQ (14:53:09) ===
+[sweep2] v9_oonly eval rc=0 (15:18:45)
+[sweep2] === v10_gateupq: quantize (15:18:45) ===
+[sweep2] v10_gateupq QUANT FAILED rc=1
+[sweep2] ALL DONE

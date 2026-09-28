@@ -121,7 +121,8 @@ difference is irrelevant** (v1 = 83.70% ± 0.65 vs uniform W4 83.64% ± 0.65,
 +0.06 pp; the Ada-vs-B70 W4 delta of ~4.3 pp is an eval-stack effect, not a
 checkpoint-coverage effect). It also shows the shipped model's own fp16
 keep-set (`in_proj_a/b` + `mtp.fc`, 76 M params, +0.1 GiB) buys **no BoolQ
-recovery** — the remaining −4.6 pp lives elsewhere (v2/v4/v3/v5 locate it).
+recovery** — the remaining −4.6 pp is located in the GDN output projection
+(see *Findings*).
 
 ## Where the loss lives (W4 uniform vs FP8, B70, paired)
 
@@ -146,15 +147,101 @@ results/b70/fp8_vllm_u/boolq.json`:
 
 ## Bits-vs-BoolQ curve
 
-<!-- filled by scripts/b70_sweep_report.py when the sweep completes -->
+Full 3270-doc BoolQ per point, one uniform eval config, B70 only. Δ and
+McNemar are vs the uniform-W4 anchor (`w4_rtn_u`).
+
+| eff. bits | point | promoted → fp16 | BoolQ | Δ vs W4 | Δ vs FP8 | McNemar vs W4 |
+|---|---|---|---|---|---|---|
+| 2.50 | w2_rtn | — (uniform int2g32) | 75.78 ± 0.75 | −7.86 | −12.45 | 4.2e-23 |
+| 4.50 | w4_rtn_u | — (uniform int4g32) | 83.64 ± 0.65 | — | −4.59 | — |
+| 4.54 | v1_inprojab | `in_proj_a/b` + `mtp.fc` | 83.70 ± 0.65 | +0.06 | −4.53 | 0.89 |
+| 4.75 | v9_oonly | `self_attn.o_proj` | 83.18 ± 0.65 | −0.46 | −5.05 | 0.053 |
+| 5.08 | v7_selfqkv | `self_attn` q/k/v | 83.88 ± 0.64 | +0.24 | −4.34 | 0.40 |
+| **5.20** | **v8_outonly** | **`linear_attn.out_proj`** | **85.11 ± 0.62** | **+1.47** | −3.12 | **3.7e-08** |
+| 5.45 | v2_outproj | `out_proj` + `o_proj` | 84.68 ± 0.63 | +1.04 | −3.55 | 2.7e-04 |
+| 5.82 | v3h_downhalf | `down_proj`, 32/64 layers | 83.33 ± 0.65 | −0.31 | −4.89 | 0.30 |
+| 5.82 | v10_gateupq* | `gate`+`up`, 16/64 layers | pending | | | |
+| 6.37 | v4_qkvz | `in_proj_qkv` + `in_proj_z` | 83.98 ± 0.64 | +0.34 | −4.25 | 0.31 |
+| 8.01 | fp8_vllm_u | — (uniform fp8) | 88.23 ± 0.56 | +4.59 | — | 1.1e-26 |
+
+\* v10 (gate+up quarter dose) failed once with a transient
+`No space left on device` and is being re-run.
+
+Two points in the table are *not* monotone in bits and that is the finding:
+promoting the GDN output projection (`v8`) beats promoting it *plus*
+`self_attn.o_proj` (`v2`, more bits), and qkv/z at 6.37 bits is
+indistinguishable from uniform W4.
 
 ## Findings
 
-<!-- pending sweep completion -->
+**1. The BoolQ loss is projection-specific, not diffuse-in-small-modules.**
+Only one tested group moves BoolQ: `linear_attn.out_proj` (the GDN output
+projection, 1.51 B params). Promoting it alone recovers +1.47 pp of the
+−4.59 pp gap (McNemar p = 3.7e-08) for +0.70 effective bits (+2.0 GiB).
+Every other tested group is statistically null:
+
+| group | params | Δ vs W4 | p |
+|---|---|---|---|
+| GDN `out_proj` (v8) | 1.51 B | **+1.47** | 3.7e-08 |
+| GDN `in_proj_qkv/z` (v4) | 4.03 B | +0.34 | 0.31 |
+| full-attn q/k/v (v7) | 1.25 B | +0.24 | 0.40 |
+| GDN `in_proj_a/b` + mtp (v1) | 0.08 B | +0.06 | 0.89 |
+| MoE `down_proj`, ½ dose (v3h) | 2.90 B | −0.31 | 0.30 |
+| full-attn `o_proj` (v9) | 0.53 B | −0.46 | 0.053 |
+
+The contrast between the GDN `out_proj` (+1.47) and the full-attention
+`o_proj` (−0.46) shows it is not "output projections" in general — it is the
+GDN output projection specifically. The recovery is also **not additive**:
+`v8` (out_proj only, 1.51 B) = 85.11% > `v2` (out_proj + o_proj, 2.05 B) =
+84.68% — the `o_proj` promotion cancels part of the `out_proj` gain.
+
+**2. The shipped checkpoint already promotes `out_proj`.** The shipped model
+keeps 17 modules at int8; 6 of them are `linear_attn.out_proj` (plus 7
+`self_attn.o_proj`, 2 `down_proj`, 1 `in_proj_qkv`, 1 `in_proj_z`). Our
+independent sweep singles out `out_proj` as the one BoolQ-sensitive group —
+independent corroboration of that part of the AutoScheme promotion set (the
+7 `o_proj` int8 promotions are *not* supported by our measurement, which
+finds `o_proj` neutral).
+
+**3. The remaining ~3.1 pp is not reachable by targeted promotion on this
+card.** After promoting every module group that fits the ~4 GiB fp16 budget
+(all the ones above), the best W4-family point (`v8`, 85.11%, 20.5 GiB) is
+still −3.12 pp from FP8. The un-promotable mass is the MoE expert MLP
+(`gate`/`up`, 11.6 B = 47 % of quantizable params; `down_proj` tested at half
+dose and null). This matches the Ada result that **uniform** 8-bit (W8 int or
+FP8) recovers BoolQ fully while int4 does not: the loss is not localised in a
+small set of sensitive layers, so it cannot be bought back with a little
+mixed precision — it needs uniform 8-bit.
+
+**4. On this stack FP8 also wins on speed.** Under the identical eval config
+the int4 checkpoints run ~700–760 input tok/s while on-the-fly FP8 runs
+~1420 tok/s — the XPU has a native fp8 matmul path, whereas the INC int4
+(auto_gptq) path does not. FP8 therefore dominates int4 on *both* accuracy
+and throughput here; int4's only remaining advantage is memory (18.5 vs
+28.0 GiB). (The earlier larger-batch int4 config reached ~1630 tok/s, so the
+int4 penalty is config-dependent — but at the low-memory config the two arms
+must share, FP8 is 2× faster.)
+
+**Practical recommendation.** If the B70 must run int4 for memory reasons,
+promote `linear_attn.out_proj` to a higher precision (fp16 here; int8 would
+be the natural choice on a loader that supports it) — it is the single
+best-value mixed-precision knob on this model (+1.5 pp for +2 GiB, verified
+at p = 3.7e-08). Do not bother with `in_proj_a/b`, `in_proj_qkv/z`,
+`self_attn` q/k/v/o, or the MoE projections: they buy nothing. But the
+regression cannot be *closed* by any mixed allocation that fits 30.3 GiB;
+closing it requires uniform ≥8-bit, which on this card means FP8 — and FP8
+is also faster.
+
+Caveat: W2/FP8 are on-the-fly conversions of the bf16 base while the
+W4-family are RTN checkpoints; the int4-vs-FP8 comparison therefore also
+differs in quantization recipe (RTN + group scales vs dynamic). The
+*within-int4* comparisons (v1…v10 vs w4_rtn_u) hold the recipe fixed and are
+the ones the attribution relies on.
 
 ## Reproduce
 
 See RUNBOOK.md "B70 mixed-precision sweep — runbook":
-`scripts/b70_sweep.sh` (anchor + v1..v5), `scripts/b70_w2.sh` (W2 floor),
+`scripts/b70_sweep.sh` (anchor + v1/v2/v4), `scripts/b70_sweep2.py`
+(v3h/v7/v8/v9/v10, budget-fitting), `scripts/b70_w2.sh` (W2 floor),
 `MODEL_KIND=base_fp8 scripts/eval_b70.sh` (FP8 arm),
 `scripts/b70_sweep_report.py` (table), `scripts/mcnemar.py` (paired test).

@@ -1,0 +1,9 @@
+=== v3h checkpoint 14:01:37 ===
+[sweep2] waiting for GPU...
+[sweep2] === v3h_downhalf: quantize (13:36:27) ===
+[sweep2] === v3h_downhalf: eval full BoolQ (13:36:54) ===
+[sweep2] v3h_downhalf eval rc=0 (14:01:26)
+[sweep2] === v7_selfqkv: quantize (14:01:26) ===
+V3h (down_proj half-dose -> fp16): 0.8333 +/- 0.0065
+  vs W4-uniform 83.64%: -0.31pp
+  vs FP8          88.23%: -4.89pp
