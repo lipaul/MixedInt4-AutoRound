@@ -1,5 +1,7 @@
 # Recovery Rate verification — results
 
+（中文汇总见 `RESULTS-zh.md`）
+
 Independent verification of the Recovery Rate claimed by
 `Pilcothink/Qwen3.8-27B-MixedInt4-AutoRound`, measured on a single
 RTX 6000 Ada (48 GB).
