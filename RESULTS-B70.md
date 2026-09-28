@@ -159,18 +159,19 @@ McNemar are vs the uniform-W4 anchor (`w4_rtn_u`).
 | 5.08 | v7_selfqkv | `self_attn` q/k/v | 83.88 ± 0.64 | +0.24 | −4.34 | 0.40 |
 | **5.20** | **v8_outonly** | **`linear_attn.out_proj`** | **85.11 ± 0.62** | **+1.47** | −3.12 | **3.7e-08** |
 | 5.45 | v2_outproj | `out_proj` + `o_proj` | 84.68 ± 0.63 | +1.04 | −3.55 | 2.7e-04 |
-| 5.17 | v10b_gateupd8* | `gate`+`up`, 8/64 layers | pending | | | |
+| 5.16 | v10b_gateupd8 | `gate`+`up`, 8/64 layers | 83.52 ± 0.65 | −0.12 | −4.71 | 0.68 |
 | 5.82 | v3h_downhalf | `down_proj`, 32/64 layers | 83.33 ± 0.65 | −0.31 | −4.89 | 0.30 |
 | 5.82 | v10_gateupq† | `gate`+`up`, 16/64 layers | not evaluable | | | |
 | 6.37 | v4_qkvz | `in_proj_qkv` + `in_proj_z` | 83.98 ± 0.64 | +0.34 | −4.25 | 0.31 |
 | 8.01 | fp8_vllm_u | — (uniform fp8) | 88.23 ± 0.56 | +4.59 | — | 1.1e-26 |
 
-\* v10b re-runs the MoE gate/up probe at a smaller dose: v10 (16 layers,
-22.72 GiB) loaded all 18 shards and then OOM'd in the **post-load repack of
-the fp16 expert tensors** — a load-path spike, not a size limit (v3h is the
-identical 22.72 GiB and loads fine). † v10 is therefore not evaluable on this
-card; its `down_proj` half-dose sibling (v3h) is null, which already bounds
-the MoE contribution.
+v10b re-ran the MoE gate/up probe at a smaller dose (−0.12 pp, p = 0.68)
+because v10 (16 layers, 22.72 GiB) loaded all 18 shards and then OOM'd in the
+**post-load repack of the fp16 expert tensors** — a load-path spike, not a
+size limit (v3h is the identical 22.72 GiB and loads fine). † v10 is therefore
+not evaluable on this card; the two MoE probes that did run (`down_proj` half
+dose, `gate`/`up` ⅛ dose) are both null, which bounds the MoE contribution to
+< ~0.5 pp.
 
 Two points in the table are *not* monotone in bits and that is the finding:
 promoting the GDN output projection (`v8`) beats promoting it *plus*
@@ -191,6 +192,7 @@ Every other tested group is statistically null:
 | GDN `in_proj_qkv/z` (v4) | 4.03 B | +0.34 | 0.31 |
 | full-attn q/k/v (v7) | 1.25 B | +0.24 | 0.40 |
 | GDN `in_proj_a/b` + mtp (v1) | 0.08 B | +0.06 | 0.89 |
+| MoE `gate`+`up`, ⅛ dose (v10b) | 1.45 B | −0.12 | 0.68 |
 | MoE `down_proj`, ½ dose (v3h) | 2.90 B | −0.31 | 0.30 |
 | full-attn `o_proj` (v9) | 0.53 B | −0.46 | 0.053 |
 
@@ -211,12 +213,15 @@ finds `o_proj` neutral).
 **3. The remaining ~3.1 pp is not reachable by targeted promotion on this
 card.** After promoting every module group that fits the ~4 GiB fp16 budget
 (all the ones above), the best W4-family point (`v8`, 85.11%, 20.5 GiB) is
-still −3.12 pp from FP8. The un-promotable mass is the MoE expert MLP
-(`gate`/`up`, 11.6 B = 47 % of quantizable params; `down_proj` tested at half
-dose and null). This matches the Ada result that **uniform** 8-bit (W8 int or
-FP8) recovers BoolQ fully while int4 does not: the loss is not localised in a
-small set of sensitive layers, so it cannot be bought back with a little
-mixed precision — it needs uniform 8-bit.
+still −3.12 pp from FP8. The un-promoted bulk is the MoE expert MLP
+(`gate`/`up` 11.6 B + `down_proj` 5.8 B = 70 % of quantizable params); both
+MoE probes that fit the memory budget are null (`down_proj` half dose
+−0.31 pp, `gate`/`up` ⅛ dose −0.12 pp), and no full-promotion variant of
+those groups is evaluable on the card (v3/v5/v10 OOM during load). This
+matches the Ada result that **uniform** 8-bit (W8 int or FP8) recovers BoolQ
+fully while int4 does not: the loss is not localised in a small set of
+sensitive layers, so it cannot be bought back with a little mixed precision —
+it needs uniform 8-bit.
 
 **4. On this stack FP8 also wins on speed.** Under the identical eval config
 the int4 checkpoints run ~700–760 input tok/s while on-the-fly FP8 runs

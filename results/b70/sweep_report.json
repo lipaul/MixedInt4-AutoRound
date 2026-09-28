@@ -177,8 +177,24 @@
     },
     {
       "tag": "v10_gateupq",
-      "desc": "W4 + mlp gate+up -> fp16 in 16 layers (quarter dose)",
+      "desc": "OMITTED: gate+up 16-layer dose (22.7 GiB) loads all shards then OOMs in the post-load repack of the fp16 experts",
       "status": "pending"
+    },
+    {
+      "tag": "v10b_gateupd8",
+      "desc": "W4 + mlp gate+up -> fp16 in 8 layers (1/8 dose)",
+      "status": "done",
+      "avg_bits_all": 6.335,
+      "avg_bits_quantizable": 5.162,
+      "boolq_acc": 0.8352,
+      "boolq_stderr": 0.0065,
+      "n": 3270,
+      "delta_vs_fp8_pp": -4.71,
+      "mcnemar_discordant": "189/35",
+      "mcnemar_p": 9.651659489279817e-27,
+      "seconds": 1363.3410577774048,
+      "weights_gib": 20.44,
+      "input_tok_s": 719.81
     },
     {
       "tag": "w4_rtn",
