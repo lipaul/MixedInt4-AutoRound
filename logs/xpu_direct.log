@@ -1,0 +1,148 @@
+platform: <vllm.platforms.xpu.XPUPlatform object at 0x7685c3bfa2d0>
+free in parent: [0.0, 30.3]
+MemorySnapshot: torch_peak=0.0GiB, torch_allocated=0.0GiB, free_memory=30.3GiB, total_memory=30.3GiB, xpu_memory=0.0GiB, torch_memory=0.0GiB, non_torch_memory=0.0GiB, timestamp=1790560836.2277887, auto_measure=True
+INFO 09-28 10:00:38 [api_utils.py:286] non-default args: {'max_model_len': 2048, 'gpu_memory_utilization': 0.85, 'disable_log_stats': True, 'quantization': 'inc', 'enforce_eager': True, 'model': '/home/acm/work/models/xpu-w4-rtn'}
+WARNING 09-28 10:00:38 [envs.py:2248] Unknown vLLM environment variable detected: VLLM_DISABLE_CUDA_PLATFORM
+INFO 09-28 10:00:38 [model.py:684] Resolved architecture: Qwen3_5ForConditionalGeneration
+INFO 09-28 10:00:38 [model.py:2021] Using max model len 2048
+WARNING 09-28 10:00:38 [model.py:981] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+INFO 09-28 10:00:39 [scheduler.py:277] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 09-28 10:00:39 [config.py:625] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
+WARNING 09-28 10:00:39 [vllm.py:1371] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+WARNING 09-28 10:00:39 [vllm.py:1406] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+INFO 09-28 10:00:39 [kernel.py:369] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+INFO 09-28 10:00:39 [vllm.py:1585] Cudagraph is disabled under eager mode
+WARNING 09-28 10:00:39 [xpu.py:302] XPU Graph is disabled by environment variable, please set VLLM_XPU_ENABLE_XPU_GRAPH=1 to enable it.
+INFO 09-28 10:00:39 [xpu.py:381] XPU platform: set server shutdown_timeout=5.
+INFO 09-28 10:00:39 [compilation.py:329] Enabled custom fusions: norm_quant, act_quant
+[transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+platform: <vllm.platforms.xpu.XPUPlatform object at 0x76e3f7b320f0>
+free in parent: [0.0, 30.3]
+MemorySnapshot: torch_peak=0.0GiB, torch_allocated=0.0GiB, free_memory=30.3GiB, total_memory=30.3GiB, xpu_memory=0.0GiB, torch_memory=0.0GiB, non_torch_memory=0.0GiB, timestamp=1790560845.745203, auto_measure=True
+INFO 09-28 10:00:48 [api_utils.py:286] non-default args: {'max_model_len': 2048, 'gpu_memory_utilization': 0.85, 'disable_log_stats': True, 'quantization': 'inc', 'enforce_eager': True, 'model': '/home/acm/work/models/xpu-w4-rtn'}
+WARNING 09-28 10:00:48 [envs.py:2248] Unknown vLLM environment variable detected: VLLM_DISABLE_CUDA_PLATFORM
+INFO 09-28 10:00:48 [model.py:684] Resolved architecture: Qwen3_5ForConditionalGeneration
+INFO 09-28 10:00:48 [model.py:2021] Using max model len 2048
+WARNING 09-28 10:00:48 [model.py:981] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+INFO 09-28 10:00:48 [scheduler.py:277] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 09-28 10:00:48 [config.py:625] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
+WARNING 09-28 10:00:48 [vllm.py:1371] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+WARNING 09-28 10:00:48 [vllm.py:1406] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+INFO 09-28 10:00:48 [kernel.py:369] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+INFO 09-28 10:00:48 [vllm.py:1585] Cudagraph is disabled under eager mode
+WARNING 09-28 10:00:48 [xpu.py:302] XPU Graph is disabled by environment variable, please set VLLM_XPU_ENABLE_XPU_GRAPH=1 to enable it.
+INFO 09-28 10:00:48 [xpu.py:381] XPU platform: set server shutdown_timeout=5.
+INFO 09-28 10:00:48 [compilation.py:329] Enabled custom fusions: norm_quant, act_quant
+[transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/tmp/opencode/vllm_direct.py", line 9, in <module>
+    llm = LLM(model="/home/acm/work/models/xpu-w4-rtn", quantization="inc",
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/entrypoints/llm.py", line 343, in __init__
+    self.llm_engine = LLMEngine.from_engine_args(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 179, in from_engine_args
+    return cls(
+           ^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 105, in __init__
+    self.engine_core = EngineCoreClient.make_client(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 110, in make_client
+    return SyncMPClient(vllm_config, executor_class, log_stats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 813, in __init__
+    super().__init__(
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 609, in __init__
+    with launch_core_engines(
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/utils.py", line 1221, in launch_core_engines
+    local_engine_manager = CoreEngineProcManager(
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/utils.py", line 235, in __init__
+    proc.start()
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/tmp/opencode/vllm_direct.py", line 9, in <module>
+    llm = LLM(model="/home/acm/work/models/xpu-w4-rtn", quantization="inc",
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/entrypoints/llm.py", line 343, in __init__
+    self.llm_engine = LLMEngine.from_engine_args(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 179, in from_engine_args
+    return cls(
+           ^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 105, in __init__
+    self.engine_core = EngineCoreClient.make_client(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 110, in make_client
+    return SyncMPClient(vllm_config, executor_class, log_stats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 813, in __init__
+    super().__init__(
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 609, in __init__
+    with launch_core_engines(
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/utils.py", line 1240, in launch_core_engines
+    wait_for_engine_startup(
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/utils.py", line 1320, in wait_for_engine_startup
+    raise RuntimeError(
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {'EngineCore': 1}

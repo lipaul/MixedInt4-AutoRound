@@ -1,0 +1,22 @@
+
+Benchmark              Base %      Quant %     Δ pp   Recovery
+----------------------------------------------------------------
+mmlu                     -.--         -.--                 n/a
+gsm8k_flex               -.--         -.--                 n/a
+gsm8k_strict             -.--         -.--                 n/a
+arc_challenge            -.--         -.--                 n/a
+boolq              88.60±1.42   81.20±1.75    -7.40     91.65%  (*)
+hellaswag          66.25±2.37   66.75±2.36    +0.50    100.75%  (within noise)
+piqa               81.56±0.90   81.61±0.90    +0.05    100.07%  (within noise)
+winogrande         76.16±1.20   76.48±1.19    +0.32    100.41%  (within noise)
+----------------------------------------------------------------
+AVERAGE(7)              78.14        76.51    -1.63     97.91%
+
+MMLU category              Base %      Quant %     Δ pp   Recovery
+----------------------------------------------------------------
+mmlu_humanities              -.--         -.--
+mmlu_other                   -.--         -.--
+mmlu_social_sciences         -.--         -.--
+mmlu_stem                    -.--         -.--
+
+(± = stderr; * marks |Δ| greater than the combined standard error)

@@ -1,0 +1,2 @@
+/tmp/opencode/xpu_eval_smoke.sh: line 11: 14713 Illegal instruction        (core dumped) "$VENV_XPU/bin/auto-round-eval" --model_name /home/acm/work/models/xpu-w4-rtn --device_map auto --tasks boolq --limit 0.02 --eval_bs 16 > logs/xpu_eval_smoke.log 2>&1
+[smoke] rc=132 elapsed=14s

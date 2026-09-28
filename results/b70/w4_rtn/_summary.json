@@ -1,0 +1,15 @@
+{
+  "boolq": {
+    "seconds": 601.5280649662018,
+    "results": {
+      "boolq": {
+        "name": "boolq",
+        "alias": "boolq",
+        "sample_len": 3270,
+        "acc,none": 0.8373088685015291,
+        "acc_stderr,none": 0.006455313301190297
+      }
+    },
+    "file": "results/b70/w4_rtn/boolq.json"
+  }
+}

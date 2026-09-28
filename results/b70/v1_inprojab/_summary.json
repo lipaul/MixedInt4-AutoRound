@@ -1,0 +1,15 @@
+{
+  "boolq": {
+    "seconds": 1387.3207530975342,
+    "results": {
+      "boolq": {
+        "name": "boolq",
+        "alias": "boolq",
+        "sample_len": 3270,
+        "acc,none": 0.8370030581039756,
+        "acc_stderr,none": 0.006460197424088825
+      }
+    },
+    "file": "results/b70/v1_inprojab/boolq.json"
+  }
+}

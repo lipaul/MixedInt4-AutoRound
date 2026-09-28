@@ -1,0 +1,33 @@
+[final] waiting for the base-cheap run to finish...
+[final] base-cheap finished at Wed Sep 23 04:44:45 PM HKT 2026
+[final] partial report (4 tasks) written
+1091 MiB, 47416 MiB
+[final] quant arc/mmlu/gsm8k starting Wed Sep 23 04:44:46 PM HKT 2026
+[final] quant rest finished Wed Sep 23 05:23:07 PM HKT 2026
+1673 MiB, 46834 MiB
+[final] base fp8 arc/mmlu/gsm8k starting Wed Sep 23 05:23:07 PM HKT 2026
+[final] base rest finished Wed Sep 23 05:52:20 PM HKT 2026
+1076 MiB, 47431 MiB
+
+Benchmark              Base %      Quant %     Δ pp   Recovery
+----------------------------------------------------------------
+mmlu               83.42±1.05   82.89±1.07    -0.53     99.37%  (within noise)
+gsm8k_flex         98.80±0.69   98.40±0.80    -0.40     99.60%  (within noise)
+gsm8k_strict       98.80±0.69   98.40±0.80    -0.40     99.60%  (within noise)
+arc_challenge      74.40±2.77   73.60±2.79    -0.80     98.92%  (within noise)
+boolq              88.60±1.42   81.20±1.75    -7.40     91.65%  (*)
+hellaswag          66.25±2.37   66.75±2.36    +0.50    100.75%  (within noise)
+piqa               81.56±0.90   81.61±0.90    +0.05    100.07%  (within noise)
+winogrande         76.16±1.20   76.48±1.19    +0.32    100.41%  (within noise)
+----------------------------------------------------------------
+AVERAGE(7)              81.31        80.13    -1.18     98.55%
+
+MMLU category              Base %      Quant %     Δ pp   Recovery
+----------------------------------------------------------------
+mmlu_humanities        85.00±2.23   84.62±2.26    -0.38     99.55%
+mmlu_other             83.46±2.09   82.69±2.19    -0.77     99.08%
+mmlu_social_sciences   89.17±1.94   88.75±1.98    -0.42     99.53%
+mmlu_stem              78.68±2.01   78.16±2.04    -0.53     99.33%
+
+(± = stderr; * marks |Δ| greater than the combined standard error)
+[final] ALL DONE Wed Sep 23 05:52:20 PM HKT 2026

@@ -1,0 +1,40 @@
+[eval] loading model: /home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128
+[eval] model_args: {'pretrained': '/home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128', 'dtype': 'bfloat16', 'trust_remote_code': True, 'max_model_len': 8192, 'gpu_memory_utilization': 0.95, 'seed': 1234, 'max_num_seqs': 16, 'enable_thinking': None, 'quantization': 'inc', 'max_num_batched_tokens': 4096}
+INFO 09-28 10:22:21 [api_utils.py:286] non-default args: {'trust_remote_code': True, 'dtype': 'bfloat16', 'seed': 1234, 'max_model_len': 8192, 'gpu_memory_utilization': 0.95, 'max_num_batched_tokens': 4096, 'max_num_seqs': 16, 'disable_log_stats': True, 'quantization': 'inc', 'model': '/home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128'}
+WARNING 09-28 10:22:21 [envs.py:2248] Unknown vLLM environment variable detected: VLLM_DISABLE_CUDA_PLATFORM
+INFO 09-28 10:22:21 [model.py:684] Resolved architecture: Qwen3_5ForConditionalGeneration
+INFO 09-28 10:22:21 [model.py:2021] Using max model len 8192
+WARNING 09-28 10:22:21 [model.py:981] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+Traceback (most recent call last):
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/scripts/run_eval.py", line 207, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/scripts/run_eval.py", line 135, in main
+    lm = build_model(args.model, args)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/scripts/run_eval.py", line 80, in build_model
+    lm = get_model("vllm").create_from_arg_string(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/lm_eval/api/model.py", line 146, in create_from_arg_string
+    return cls(**args, **args2)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/lm_eval/models/vllm_causallms.py", line 154, in __init__
+    self.model = LLM(**self.model_args)  # type: ignore[invalid-argument-type]
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/entrypoints/llm.py", line 343, in __init__
+    self.llm_engine = LLMEngine.from_engine_args(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 171, in from_engine_args
+    vllm_config = engine_args.create_engine_config(usage_context)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/engine/arg_utils.py", line 2053, in create_engine_config
+    model_config = self.create_model_config()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/engine/arg_utils.py", line 1809, in create_model_config
+    return ModelConfig(
+           ^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig
+  Value error, Quantization method specified in the model config (fp8) does not match the quantization method specified in the `quantization` argument (inc). [type=value_error, input_value=ArgsKwargs((), {'model': ...nderer_num_workers': 1}), input_type=ArgsKwargs]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error

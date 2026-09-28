@@ -1,0 +1,7 @@
+[fp8] waiting for the W4 eval to finish...
+[fp8] starting Mon Sep 28 10:20:45 AM HKT 2026
+[fp8] quantize rc=0
+[fp8] model dir: /home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128
+30G	/home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128
+bits: 8 | data_type: fp | group: [128, 128] | packing: None
+[fp8] BoolQ done Mon Sep 28 10:22:24 AM HKT 2026

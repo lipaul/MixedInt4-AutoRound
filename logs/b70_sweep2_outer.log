@@ -1,0 +1,4 @@
+[sweep2] waiting for GPU...
+[sweep2] === v3h_downhalf: quantize (13:36:27) ===
+[verify] promoted 32 / expected 32 (extra_config total 143)
+[sweep2] === v3h_downhalf: eval full BoolQ (13:36:54) ===

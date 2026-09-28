@@ -1,0 +1,14 @@
+# virtualenvs
+.venv/
+.venv-xpu/
+.venv-vllm-xpu/
+
+# python
+__pycache__/
+*.pyc
+
+# auto-round scratch workspace
+ar_work_space/
+
+# OS/editor
+.DS_Store

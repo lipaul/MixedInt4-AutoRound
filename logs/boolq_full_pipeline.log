@@ -1,0 +1,6 @@
+[boolq_full] quant starting Sat Sep 26 01:06:31 PM HKT 2026
+664 MiB, 47843 MiB
+[boolq_full] quant done Sat Sep 26 01:15:46 PM HKT 2026
+[boolq_full] base_fp8 starting Sat Sep 26 01:15:46 PM HKT 2026
+645 MiB, 47861 MiB
+./scripts/run_boolq_full.sh: line 22: 12695 Aborted                    (core dumped) "$PY" scripts/run_eval.py base_fp8 --output results/boolq_full/base --only boolq --limit 3270 --max-num-seqs 32 --max-num-batched-tokens 16384 --max-model-len 32768 --gpu-mem 0.88 --max-gen-toks 4096 > logs/boolq_full_base.log 2>&1

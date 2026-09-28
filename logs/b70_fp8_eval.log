@@ -1,0 +1,261 @@
+[eval] loading model: /home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128
+[eval] model_args: {'pretrained': '/home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128', 'dtype': 'bfloat16', 'trust_remote_code': True, 'max_model_len': 8192, 'gpu_memory_utilization': 0.95, 'seed': 1234, 'max_num_seqs': 16, 'enable_thinking': None, 'quantization': 'fp8', 'max_num_batched_tokens': 4096}
+INFO 09-28 10:23:14 [api_utils.py:286] non-default args: {'trust_remote_code': True, 'dtype': 'bfloat16', 'seed': 1234, 'max_model_len': 8192, 'gpu_memory_utilization': 0.95, 'max_num_batched_tokens': 4096, 'max_num_seqs': 16, 'disable_log_stats': True, 'quantization': 'fp8', 'model': '/home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128'}
+WARNING 09-28 10:23:14 [envs.py:2248] Unknown vLLM environment variable detected: VLLM_DISABLE_CUDA_PLATFORM
+INFO 09-28 10:23:14 [model.py:684] Resolved architecture: Qwen3_5ForConditionalGeneration
+INFO 09-28 10:23:14 [model.py:2021] Using max model len 8192
+WARNING 09-28 10:23:14 [model.py:981] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+INFO 09-28 10:23:16 [scheduler.py:277] Chunked prefill is enabled with max_num_batched_tokens=4096.
+INFO 09-28 10:23:16 [config.py:625] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
+INFO 09-28 10:23:16 [kernel.py:369] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+WARNING 09-28 10:23:16 [xpu.py:302] XPU Graph is disabled by environment variable, please set VLLM_XPU_ENABLE_XPU_GRAPH=1 to enable it.
+INFO 09-28 10:23:16 [xpu.py:381] XPU platform: set server shutdown_timeout=5.
+INFO 09-28 10:23:16 [compilation.py:329] Enabled custom fusions: norm_quant, act_quant
+[transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(EngineCore pid=103409) INFO 09-28 10:23:25 [core.py:123] Initializing a V1 LLM engine (v0.29.0) with config: model='/home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128', speculative_config=None, tokenizer='/home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=fp8, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=xpu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=1234, served_model_name=/home/acm/work/models/xpu-fp8/Qwen3.8-27B-fp-w8g128x128, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['+quant_fp8', 'none', '+quant_fp8'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_compute_ple_ngram_ids', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [4096], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 32, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, enable_bf16x3_router_gemm=False, moe_backend='auto', linear_backend='auto')
+(EngineCore pid=103409) INFO 09-28 10:23:26 [parallel_state.py:1775] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_dcf1722d4f794b7fbd40ca19aa27c63a backend=xccl
+(EngineCore pid=103409) INFO 09-28 10:23:26 [parallel_state.py:2119] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=103409) INFO 09-28 10:23:26 [xpu_worker.py:113] Using V2 Model Runner
+(EngineCore pid=103409) INFO 09-28 10:23:27 [model_runner.py:382] Loading model from scratch...
+(EngineCore pid=103409) INFO 09-28 10:23:27 [__init__.py:695] Selected XPUFp8BlockScaledMMKernel for Fp8LinearMethod
+(EngineCore pid=103409) INFO 09-28 10:23:27 [xpu.py:232] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=103409) INFO 09-28 10:23:27 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=103409) INFO 09-28 10:23:27 [qwen_gdn_linear_attn.py:167] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=103409) INFO 09-28 10:23:27 [qwen_gdn_linear_attn.py:519] GDN decode kernel: cuda
+(EngineCore pid=103409) INFO 09-28 10:23:27 [xpu.py:198] Using Flash Attention backend.
+(EngineCore pid=103409) INFO 09-28 10:23:27 [flash_attn.py:897] Using FlashAttention version 2
+(EngineCore pid=103409) INFO 09-28 10:23:28 [weight_utils.py:863] Filesystem type for checkpoints: EXT4. Checkpoint size: 29.07 GiB. Available RAM: 171.82 GiB.
+(EngineCore pid=103409) INFO 09-28 10:23:28 [weight_utils.py:886] Auto-prefetch is disabled because the filesystem (EXT4) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=103409) Loading safetensors checkpoint shards:   0% Completed | 0/8 [00:00<?, ?it/s]
+(EngineCore pid=103409) Loading safetensors checkpoint shards:  12% Completed | 1/8 [00:01<00:07,  1.10s/it]
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374] EngineCore failed to start.
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374] Traceback (most recent call last):
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1336, in run_engine_core
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return func(*args, **kwargs)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1093, in __init__
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     super().__init__(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 134, in __init__
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return func(*args, **kwargs)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 110, in __init__
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     self._init_executor()
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 74, in _init_executor
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     self.driver_worker.load_model()
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 495, in load_model
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/worker/gpu/model_runner.py", line 384, in load_model
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     self.model = model_loader.load_model(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return func(*args, **kwargs)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/base_loader.py", line 64, in load_model
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     self.load_weights(model, model_config)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return func(*args, **kwargs)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 427, in load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     loaded_weights = model.load_weights(self.get_all_weights(model_config, model))
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_5.py", line 605, in load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 444, in load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     yield from self._load_module(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 359, in _load_module
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     loaded_params = module_load_weights(weights)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_5.py", line 440, in load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 444, in load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     yield from self._load_module(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 359, in _load_module
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     loaded_params = module_load_weights(weights)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_5.py", line 289, in load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 444, in load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     yield from self._load_module(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     yield from self._load_module(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     yield from self._load_module(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   [Previous line repeated 1 more time]
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 366, in _load_module
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     yield from map(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/layers/linear.py", line 978, in load_weights
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     param.weight_loader(param, loaded_weight, shard_id)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/layers/linear.py", line 956, in weight_loader_v2
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     param.load_merged_column_weight(
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/parameter.py", line 171, in load_merged_column_weight
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]     param_data = param_data.narrow(self.output_dim, shard_offset, shard_size)
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374]                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) ERROR 09-28 10:23:30 [core.py:1374] RuntimeError: start (1) + length (1) exceeds dimension size (1).
+(EngineCore pid=103409) Process EngineCore:
+(EngineCore pid=103409) Traceback (most recent call last):
+(EngineCore pid=103409)   File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore pid=103409)     self.run()
+(EngineCore pid=103409)   File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 108, in run
+(EngineCore pid=103409)     self._target(*self._args, **self._kwargs)
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1378, in run_engine_core
+(EngineCore pid=103409)     raise e
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1336, in run_engine_core
+(EngineCore pid=103409)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=103409)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=103409)     return func(*args, **kwargs)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1093, in __init__
+(EngineCore pid=103409)     super().__init__(
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 134, in __init__
+(EngineCore pid=103409)     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=103409)                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=103409)     return func(*args, **kwargs)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 110, in __init__
+(EngineCore pid=103409)     self._init_executor()
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 74, in _init_executor
+(EngineCore pid=103409)     self.driver_worker.load_model()
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 495, in load_model
+(EngineCore pid=103409)     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/worker/gpu/model_runner.py", line 384, in load_model
+(EngineCore pid=103409)     self.model = model_loader.load_model(
+(EngineCore pid=103409)                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=103409)     return func(*args, **kwargs)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/base_loader.py", line 64, in load_model
+(EngineCore pid=103409)     self.load_weights(model, model_config)
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=103409)     return func(*args, **kwargs)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 427, in load_weights
+(EngineCore pid=103409)     loaded_weights = model.load_weights(self.get_all_weights(model_config, model))
+(EngineCore pid=103409)                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_5.py", line 605, in load_weights
+(EngineCore pid=103409)     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=103409)     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 444, in load_weights
+(EngineCore pid=103409)     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=103409)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409)     yield from self._load_module(
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 359, in _load_module
+(EngineCore pid=103409)     loaded_params = module_load_weights(weights)
+(EngineCore pid=103409)                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_5.py", line 440, in load_weights
+(EngineCore pid=103409)     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=103409)     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 444, in load_weights
+(EngineCore pid=103409)     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=103409)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409)     yield from self._load_module(
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 359, in _load_module
+(EngineCore pid=103409)     loaded_params = module_load_weights(weights)
+(EngineCore pid=103409)                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_5.py", line 289, in load_weights
+(EngineCore pid=103409)     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=103409)     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=103409)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 444, in load_weights
+(EngineCore pid=103409)     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=103409)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409)     yield from self._load_module(
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409)     yield from self._load_module(
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 382, in _load_module
+(EngineCore pid=103409)     yield from self._load_module(
+(EngineCore pid=103409)   [Previous line repeated 1 more time]
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 366, in _load_module
+(EngineCore pid=103409)     yield from map(
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/layers/linear.py", line 978, in load_weights
+(EngineCore pid=103409)     param.weight_loader(param, loaded_weight, shard_id)
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/layers/linear.py", line 956, in weight_loader_v2
+(EngineCore pid=103409)     param.load_merged_column_weight(
+(EngineCore pid=103409)   File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/model_executor/parameter.py", line 171, in load_merged_column_weight
+(EngineCore pid=103409)     param_data = param_data.narrow(self.output_dim, shard_offset, shard_size)
+(EngineCore pid=103409)                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=103409) RuntimeError: start (1) + length (1) exceeds dimension size (1).
+(EngineCore pid=103409) Loading safetensors checkpoint shards:  12% Completed | 1/8 [00:02<00:18,  2.67s/it]
+(EngineCore pid=103409) 
+Traceback (most recent call last):
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/scripts/run_eval.py", line 207, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/scripts/run_eval.py", line 135, in main
+    lm = build_model(args.model, args)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/scripts/run_eval.py", line 80, in build_model
+    lm = get_model("vllm").create_from_arg_string(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/lm_eval/api/model.py", line 146, in create_from_arg_string
+    return cls(**args, **args2)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/lm_eval/models/vllm_causallms.py", line 154, in __init__
+    self.model = LLM(**self.model_args)  # type: ignore[invalid-argument-type]
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/entrypoints/llm.py", line 343, in __init__
+    self.llm_engine = LLMEngine.from_engine_args(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 179, in from_engine_args
+    return cls(
+           ^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 105, in __init__
+    self.engine_core = EngineCoreClient.make_client(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 110, in make_client
+    return SyncMPClient(vllm_config, executor_class, log_stats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 813, in __init__
+    super().__init__(
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 609, in __init__
+    with launch_core_engines(
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/acm/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/utils.py", line 1240, in launch_core_engines
+    wait_for_engine_startup(
+  File "/home/acm/paul_nv/MixedInt4-AutoRound/.venv-vllm-xpu/lib/python3.12/site-packages/vllm/v1/engine/utils.py", line 1320, in wait_for_engine_startup
+    raise RuntimeError(
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {'EngineCore': 1}

@@ -1,0 +1,15 @@
+{
+  "boolq": {
+    "seconds": 8.018826246261597,
+    "results": {
+      "boolq": {
+        "name": "boolq",
+        "alias": "boolq",
+        "sample_len": 20,
+        "acc,none": 0.9,
+        "acc_stderr,none": 0.06882472016116853
+      }
+    },
+    "file": "results/xpu_smoke/boolq.json"
+  }
+}

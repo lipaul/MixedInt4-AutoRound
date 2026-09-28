@@ -1,0 +1,4 @@
+[w2] waiting for b70_sweep.sh to finish...
+[w2] starting 13:11:11
+[w2] checkpoint: /home/acm/work/models/xpu-variants/w2_rtn (14G)
+[w2] eval rc=0 (13:36:20)

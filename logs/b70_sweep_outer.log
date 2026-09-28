@@ -1,0 +1,29 @@
+[sweep] waiting for GPU to be free...
+[sweep] === w4_rtn_u: re-eval anchor (11:24:41) ===
+[sweep] w4_rtn_u rc=0 (11:51:14)
+[sweep] === v1_inprojab: quantize (11:51:14) ===
+[verify] promoted 99 / expected 97 (extra_config total 210)
+20G	/home/acm/work/models/xpu-variants/v1_inprojab
+[sweep] === v1_inprojab: eval full BoolQ (11:51:46) ===
+[sweep] v1_inprojab eval rc=0 (12:17:24)
+[sweep] === v2_outproj: quantize (12:17:24) ===
+[verify] promoted 67 / expected 65 (extra_config total 178)
+22G	/home/acm/work/models/xpu-variants/v2_outproj
+[sweep] === v2_outproj: eval full BoolQ (12:17:51) ===
+[sweep] v2_outproj eval rc=0 (12:42:38)
+[sweep] === v4_qkvz: quantize (12:42:38) ===
+[verify] promoted 98 / expected 96 (extra_config total 209)
+25G	/home/acm/work/models/xpu-variants/v4_qkvz
+[sweep] === v4_qkvz: eval full BoolQ (12:43:04) ===
+[sweep] v4_qkvz eval rc=0 (13:06:56)
+[sweep] === v3_downproj: quantize (13:06:56) ===
+[verify] promoted 66 / expected 65 (extra_config total 177)
+27G	/home/acm/work/models/xpu-variants/v3_downproj
+[sweep] === v3_downproj: eval full BoolQ (13:07:23) ===
+[sweep] v3_downproj eval rc=1 (13:08:57)
+[sweep] === v5_linattn: quantize (13:08:57) ===
+[verify] promoted 240 / expected 240 (extra_config total 352)
+27G	/home/acm/work/models/xpu-variants/v5_linattn
+[sweep] === v5_linattn: eval full BoolQ (13:09:22) ===
+[sweep] v5_linattn eval rc=1 (13:10:57)
+[sweep] ALL DONE 13:10:57

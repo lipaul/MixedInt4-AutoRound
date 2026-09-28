@@ -1,0 +1,156 @@
+{
+  "fp8_anchor": {
+    "acc": 0.882262996941896,
+    "stderr": 0.005637000333960055,
+    "n": 3270
+  },
+  "rows": [
+    {
+      "tag": "w4_rtn_u",
+      "desc": "uniform W4g32 (anchor, uniform eval cfg)",
+      "status": "done",
+      "avg_bits_all": 5.744,
+      "avg_bits_quantizable": 4.5,
+      "boolq_acc": 0.8364,
+      "boolq_stderr": 0.0065,
+      "n": 3270,
+      "delta_vs_fp8_pp": -4.59,
+      "mcnemar_discordant": "182/32",
+      "mcnemar_p": 1.1389089467591858e-26,
+      "seconds": 1392.9771664142609,
+      "weights_gib": 18.52,
+      "input_tok_s": 701.31
+    },
+    {
+      "tag": "w2_rtn",
+      "desc": "uniform W2g32 (floor point, 2.5 eff. bits)",
+      "status": "done",
+      "avg_bits_all": 3.961,
+      "avg_bits_quantizable": 2.5,
+      "boolq_acc": 0.7578,
+      "boolq_stderr": 0.0075,
+      "n": 3270,
+      "delta_vs_fp8_pp": -12.45,
+      "mcnemar_discordant": "548/141",
+      "mcnemar_p": 1.7257220027419252e-57,
+      "seconds": 1339.374719619751,
+      "weights_gib": 12.84,
+      "input_tok_s": 729.47
+    },
+    {
+      "tag": "v1_inprojab",
+      "desc": "W4 + in_proj_a/b + mtp.fp -> fp16 (= CUDA W4 coverage)",
+      "status": "done",
+      "avg_bits_all": 5.776,
+      "avg_bits_quantizable": 4.535,
+      "boolq_acc": 0.837,
+      "boolq_stderr": 0.0065,
+      "n": 3270,
+      "delta_vs_fp8_pp": -4.53,
+      "mcnemar_discordant": "188/40",
+      "mcnemar_p": 3.930477350462261e-24,
+      "seconds": 1387.3207530975342,
+      "weights_gib": 18.56,
+      "input_tok_s": 704.14
+    },
+    {
+      "tag": "v2_outproj",
+      "desc": "W4 + out_proj/o_proj -> fp16",
+      "status": "done",
+      "avg_bits_all": 6.591,
+      "avg_bits_quantizable": 5.449,
+      "boolq_acc": 0.8468,
+      "boolq_stderr": 0.0063,
+      "n": 3270,
+      "delta_vs_fp8_pp": -3.55,
+      "mcnemar_discordant": "151/35",
+      "mcnemar_p": 2.2717737089011182e-18,
+      "seconds": 1343.6310274600983,
+      "weights_gib": 21.21,
+      "input_tok_s": 727.34
+    },
+    {
+      "tag": "v4_qkvz",
+      "desc": "W4 + in_proj_qkv/z -> fp16",
+      "status": "done",
+      "avg_bits_all": 7.411,
+      "avg_bits_quantizable": 6.369,
+      "boolq_acc": 0.8398,
+      "boolq_stderr": 0.0064,
+      "n": 3270,
+      "delta_vs_fp8_pp": -4.25,
+      "mcnemar_discordant": "178/39",
+      "mcnemar_p": 2.0708134577353566e-22,
+      "seconds": 1292.8782114982605,
+      "weights_gib": 23.91,
+      "input_tok_s": 755.83
+    },
+    {
+      "tag": "v3_downproj",
+      "desc": "OMITTED: 26.3 GiB weights OOM during vLLM load (30.3 GiB card); see v3h dose variant",
+      "status": "pending"
+    },
+    {
+      "tag": "v5_linattn",
+      "desc": "OMITTED: 26.0 GiB weights OOM during vLLM load; ~ v1+v2+v4 composition",
+      "status": "pending"
+    },
+    {
+      "tag": "fp8_vllm_u",
+      "desc": "FP8 (vLLM on-the-fly) - 8-bit ceiling",
+      "status": "done",
+      "avg_bits_all": 8.873,
+      "avg_bits_quantizable": 8.008,
+      "boolq_acc": 0.8823,
+      "boolq_stderr": 0.0056,
+      "n": 3270,
+      "delta_vs_fp8_pp": 0.0,
+      "mcnemar_discordant": "0/0",
+      "mcnemar_p": 1.0,
+      "seconds": 690.6566119194031,
+      "weights_gib": 27.99,
+      "input_tok_s": 1421.36
+    },
+    {
+      "tag": "v3h_downhalf",
+      "desc": "W4 + down_proj -> fp16 in every other layer (32/64, dose)",
+      "status": "pending"
+    },
+    {
+      "tag": "v7_selfqkv",
+      "desc": "W4 + self_attn q/k/v -> fp16",
+      "status": "pending"
+    },
+    {
+      "tag": "v8_outonly",
+      "desc": "W4 + linear_attn.out_proj only -> fp16 (splits v2)",
+      "status": "pending"
+    },
+    {
+      "tag": "v9_oonly",
+      "desc": "W4 + self_attn.o_proj only -> fp16 (splits v2)",
+      "status": "pending"
+    },
+    {
+      "tag": "v10_gateupq",
+      "desc": "W4 + mlp gate+up -> fp16 in 16 layers (quarter dose)",
+      "status": "pending"
+    },
+    {
+      "tag": "w4_rtn",
+      "desc": "uniform W4g32 (earlier eval cfg: len 8192 / seqs 16 / chunk 4096)",
+      "status": "done",
+      "avg_bits_all": 5.744,
+      "avg_bits_quantizable": 4.5,
+      "boolq_acc": 0.8373,
+      "boolq_stderr": 0.0065,
+      "n": 3270,
+      "delta_vs_fp8_pp": -4.5,
+      "mcnemar_discordant": "182/35",
+      "mcnemar_p": 3.7264792618189777e-25,
+      "seconds": 601.5280649662018,
+      "weights_gib": 18.52,
+      "input_tok_s": 1634.08
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[eval_rtn] W8 -> /home/acm/work/models/qwen38-w8-rtn/Qwen3.8-27B-w8g32  (Sat Sep 26 01:42:08 PM HKT 2026)
+654 MiB, 47853 MiB
+./scripts/eval_rtn.sh: line 9: 15673 Aborted                    (core dumped) ./scripts/eval_boolq_custom.sh "$MODEL_DIR" "w${BITS}_rtn" > "logs/boolq_w${BITS}.log" 2>&1
+[eval_rtn] W8 done Sat Sep 26 01:55:01 PM HKT 2026
+[eval_rtn] W4 -> /home/acm/work/models/qwen38-w4-rtn/Qwen3.8-27B-w4g32  (Sat Sep 26 01:55:01 PM HKT 2026)
+654 MiB, 47853 MiB
+./scripts/eval_rtn.sh: line 9: 16525 Aborted                    (core dumped) ./scripts/eval_boolq_custom.sh "$MODEL_DIR" "w${BITS}_rtn" > "logs/boolq_w${BITS}.log" 2>&1
+[eval_rtn] W4 done Sat Sep 26 02:04:53 PM HKT 2026
+variant                precision     BoolQ acc   stderr vs FP8 base (measured)
+--------------------------------------------------------------------------------
+BF16 base (card)       16-bit           86.64%                     (published)
+FP8 base (measured)    8-bit fp8        87.89%    0.57          no discordant
+Shipped AutoRound W4   4-bit mixed      80.28%    0.70  p=1.9e-43 (302 vs 53)
+RTN W8                 8-bit int        86.45%    0.60   p=1.9e-06 (72 vs 25)
+RTN W4                 4-bit int        79.39%    0.71  p=1.5e-51 (327 vs 49)
+
+Interpretation: if RTN W8 lands near the FP8/BF16 base and well above
+RTN W4, then bit width - not the AutoRound recipe - is what BoolQ is
+missing; if RTN W4 ~ shipped W4 and RTN W8 does not recover, the loss
+is not purely a weight-precision effect.
