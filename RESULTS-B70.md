@@ -159,13 +159,18 @@ McNemar are vs the uniform-W4 anchor (`w4_rtn_u`).
 | 5.08 | v7_selfqkv | `self_attn` q/k/v | 83.88 ± 0.64 | +0.24 | −4.34 | 0.40 |
 | **5.20** | **v8_outonly** | **`linear_attn.out_proj`** | **85.11 ± 0.62** | **+1.47** | −3.12 | **3.7e-08** |
 | 5.45 | v2_outproj | `out_proj` + `o_proj` | 84.68 ± 0.63 | +1.04 | −3.55 | 2.7e-04 |
+| 5.17 | v10b_gateupd8* | `gate`+`up`, 8/64 layers | pending | | | |
 | 5.82 | v3h_downhalf | `down_proj`, 32/64 layers | 83.33 ± 0.65 | −0.31 | −4.89 | 0.30 |
-| 5.82 | v10_gateupq* | `gate`+`up`, 16/64 layers | pending | | | |
+| 5.82 | v10_gateupq† | `gate`+`up`, 16/64 layers | not evaluable | | | |
 | 6.37 | v4_qkvz | `in_proj_qkv` + `in_proj_z` | 83.98 ± 0.64 | +0.34 | −4.25 | 0.31 |
 | 8.01 | fp8_vllm_u | — (uniform fp8) | 88.23 ± 0.56 | +4.59 | — | 1.1e-26 |
 
-\* v10 (gate+up quarter dose) failed once with a transient
-`No space left on device` and is being re-run.
+\* v10b re-runs the MoE gate/up probe at a smaller dose: v10 (16 layers,
+22.72 GiB) loaded all 18 shards and then OOM'd in the **post-load repack of
+the fp16 expert tensors** — a load-path spike, not a size limit (v3h is the
+identical 22.72 GiB and loads fine). † v10 is therefore not evaluable on this
+card; its `down_proj` half-dose sibling (v3h) is null, which already bounds
+the MoE contribution.
 
 Two points in the table are *not* monotone in bits and that is the finding:
 promoting the GDN output projection (`v8`) beats promoting it *plus*

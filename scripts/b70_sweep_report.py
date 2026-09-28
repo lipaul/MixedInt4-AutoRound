@@ -58,7 +58,9 @@ VARIANTS = [
     ("v9_oonly", "/home/acm/work/models/xpu-variants/v9_oonly", "logs/sweep2_eval_v9_oonly.log",
      "W4 + self_attn.o_proj only -> fp16 (splits v2)"),
     ("v10_gateupq", "/home/acm/work/models/xpu-variants/v10_gateupq", "logs/sweep2_eval_v10_gateupq.log",
-     "W4 + mlp gate+up -> fp16 in 16 layers (quarter dose)"),
+     "OMITTED: gate+up 16-layer dose (22.7 GiB) loads all shards then OOMs in the post-load repack of the fp16 experts"),
+    ("v10b_gateupd8", "/home/acm/work/models/xpu-variants/v10b_gateupd8", "logs/sweep2_eval_v10b_gateupd8.log",
+     "W4 + mlp gate+up -> fp16 in 8 layers (1/8 dose)"),
 ]
 EXTRA_ROWS = [
     ("w4_rtn", "/home/acm/work/models/xpu-w4-rtn", "logs/b70_w4_full.log",
